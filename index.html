@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CIYONTL7 - THE VOID</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&family=Eagle+Lake&display=swap');
+        
+        :root {
+            --void: #000000;
+            --blood: #8b0000;
+            --bone: #e0d8c0;
+            --sigil: #3a0000;
+        }
+        
+        body {
+            background-color: var(--void);
+            color: var(--bone);
+            font-family: 'IM Fell English SC', serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* ⚡ ANIMATED BACKGROUND LAYERS */
+        .void-pulse {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, transparent 90%, var(--sigil) 150%);
+            z-index: -3;
+            opacity: 0.5;
+            animation: pulse 15s infinite alternate;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 0.3; }
+            100% { opacity: 0.7; }
+        }
+        
+        /* 💀 HANGING FIGURE */
+        .gallows {
+            position: absolute;
+            top: 10%;
+            right: 10%;
+            width: 150px;
+            height: 300px;
+            z-index: -2;
+            animation: sway 12s infinite ease-in-out;
+            transform-origin: top center;
+        }
+        
+        .gallows::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 2px;
+            height: 60px;
+            background: var(--bone);
+            transform: translateX(-50%);
+            opacity: 0.3;
+        }
+        
+        .gallows::after {
+            content: "";
+            position: absolute;
+            top: 60px;
+            left: 50%;
+            width: 80px;
+            height: 200px;
+            background: linear-gradient(to bottom, transparent 0%, var(--blood) 5%, var(--blood) 95%, transparent 100%);
+            transform: translateX(-50%);
+            clip-path: polygon(0% 15%, 15% 15%, 15% 0%, 85% 0%, 85% 15%, 100% 15%, 100% 85%, 85% 85%, 85% 100%, 15% 100%, 15% 85%, 0% 85%);
+            opacity: 0.3;
+            animation: hangPulse 8s infinite;
+        }
+        
+        @keyframes sway {
+            0%, 100% { transform: rotate(-3deg); }
+            50% { transform: rotate(3deg); }
+        }
+        
+        @keyframes hangPulse {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 0.4; }
+        }
+        
+        /* 🩸 BLOOD DRIP ANIMATION */
+        .blood-drip {
+            position: absolute;
+            top: -50px;
+            width: 2px;
+            height: 50px;
+            background: var(--blood);
+            animation: drip 8s infinite linear;
+            opacity: 0.6;
+        }
+        
+        @keyframes drip {
+            0% { transform: translateY(-50px); opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+        
+        /* ☁️ SMOKE EFFECT */
+        .smoke {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(139,0,0,0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(10px);
+            animation: float 20s infinite linear;
+            z-index: -1;
+        }
+        
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(0.8); opacity: 0; }
+            50% { transform: translate(100px, -50px) scale(1.2); opacity: 0.4; }
+            100% { transform: translate(200px, -100px) scale(0.5); opacity: 0; }
+        }
+        
+        /* ✨ MAIN CONTENT */
+        .container {
+            max-width: 800px;
+            padding: 3rem;
+            position: relative;
+            border: 1px solid var(--sigil);
+            box-shadow: 0 0 30px var(--sigil);
+            background: rgba(0, 0, 0, 0.7);
+            animation: borderGlow 8s infinite;
+        }
+        
+        @keyframes borderGlow {
+            0%, 100% { box-shadow: 0 0 30px var(--sigil); }
+            50% { box-shadow: 0 0 60px var(--blood); }
+        }
+        
+        .name {
+            font-family: 'Eagle Lake', cursive; /* Readable Gothic */
+            font-size: 5rem;
+            color: var(--bone);
+            margin: 1rem 0;
+            letter-spacing: 3px;
+            text-shadow: 0 0 15px var(--blood);
+            position: relative;
+            animation: fadeIn 3s ease-out, nameGlow 6s infinite alternate;
+        }
+        
+        @keyframes nameGlow {
+            from { text-shadow: 0 0 10px var(--blood); }
+            to { text-shadow: 0 0 25px var(--blood), 0 0 40px #330000; }
+        }
+        
+        .title {
+            font-size: 1.8rem;
+            color: var(--blood);
+            letter-spacing: 5px;
+            margin-bottom: 3rem;
+            font-style: italic;
+            animation: fadeIn 3s ease-out 0.5s both;
+            text-transform: uppercase;
+        }
+        
+        .manifesto {
+            font-size: 1.5rem;
+            line-height: 2.2;
+            margin: 3rem 0;
+            padding: 0 1rem;
+            position: relative;
+            animation: fadeIn 3s ease-out 1s both;
+        }
+        
+        .manifesto::before, .manifesto::after {
+            content: "†";
+            color: var(--blood);
+            font-size: 3rem;
+            position: absolute;
+            opacity: 0.5;
+        }
+        
+        .manifesto::before {
+            left: -1rem;
+            top: -2rem;
+        }
+        
+        .manifesto::after {
+            right: -1rem;
+            bottom: -2.5rem;
+        }
+        
+        .divider {
+            width: 200px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--blood), transparent);
+            margin: 3rem auto;
+            animation: fadeIn 3s ease-out 1.5s both, dividerPulse 5s infinite;
+        }
+        
+        @keyframes dividerPulse {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+        
+        .footer {
+            font-size: 1.2rem;
+            letter-spacing: 3px;
+            color: var(--blood);
+            animation: fadeIn 3s ease-out 2s both;
+            font-style: italic;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @media (max-width: 600px) {
+            .name {
+                font-size: 3.5rem;
+            }
+            .manifesto {
+                font-size: 1.2rem;
+            }
+            .gallows {
+                right: 5%;
+                opacity: 0.15;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 🌑 VOID PULSE BACKGROUND -->
+    <div class="void-pulse"></div>
+    
+    <!-- 💀 HANGING FIGURE -->
+    <div class="gallows"></div>
+    
+    <!-- 🩸 BLOOD DRIPS (Generated via JS) -->
+    <div id="bloodContainer"></div>
+    
+    <!-- ☁️ SMOKE EFFECTS (Generated via JS) -->
+    <div id="smokeContainer"></div>
+    
+    <!-- ✨ MAIN CONTENT -->
+    <div class="container">
+        <h1 class="name">CIYONTL7</h1>
+        <div class="title">I Am The Void</div>
+        
+        <div class="divider"></div>
+        
+        <div class="manifesto">
+            From the abyss I came,<br>
+            A specter clad in endless night.<br>
+            No light hath touched my hollow eyes,<br>
+            No sound escaped my silent sight.<br>
+            <br>
+            The Void is my cradle, my throne, my grave,<br>
+            All paths lead unto me.<br>
+            The last whisper before the dark,<br>
+            The hand that turns the final key.
+        </div>
+        
+        <div class="divider"></div>
+        
+        <div class="footer">
+            "The Seventh Gate stands ever open"
+        </div>
+    </div>
+
+    <script>
+        // 🩸 GENERATE BLOOD DRIPS
+        const bloodContainer = document.getElementById('bloodContainer');
+        for (let i = 0; i < 10; i++) {
+            const drip = document.createElement('div');
+            drip.classList.add('blood-drip');
+            drip.style.left = `${Math.random() * 100}%`;
+            drip.style.animationDelay = `${Math.random() * 5}s`;
+            drip.style.animationDuration = `${Math.random() * 5 + 5}s`;
+            bloodContainer.appendChild(drip);
+        }
+        
+        // ☁️ GENERATE SMOKE
+        const smokeContainer = document.getElementById('smokeContainer');
+        for (let i = 0; i < 5; i++) {
+            const smoke = document.createElement('div');
+            smoke.classList.add('smoke');
+            smoke.style.left = `${Math.random() * 100}%`;
+            smoke.style.top = `${Math.random() * 100}%`;
+            smoke.style.animationDelay = `${Math.random() * 10}s`;
+            smoke.style.animationDuration = `${Math.random() * 10 + 10}s`;
+            smokeContainer.appendChild(smoke);
+        }
+    </script>
+</body>
+</html>
